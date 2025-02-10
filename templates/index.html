@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+</head>
+
+<body>
+    <form action="/plot" method="POST">
+        <label for="start_time">Start Time:</label>
+        <input type="datetime-local" id="start_time" name="start_time" required>
+        
+        <label for="end_time">End Time:</label>
+        <input type="datetime-local" id="end_time" name="end_time" required>
+    
+        <label for="data_types">Select Data Types:</label>
+        <select id="data_types" name="data_types" multiple>
+            <option value="flow">Water Flow</option>
+            <option value="Water_temp">Water Temperature</option>
+            <option value="DHT_temp">DHT Temperature</option>
+            <option value="DHT_hum">DHT Humidity</option>
+        </select>
+    
+        <button type="submit">Generate Graph</button>
+    </form>
+    
+</body>
+
+</html>
