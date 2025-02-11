@@ -9,22 +9,22 @@
 </head>
 
 <body>
+    <h1>Select Time Range & Data Types</h1>
+    
     <form action="/plot" method="POST">
         <label for="start_time">Start Time:</label>
-        <input type="datetime-local" id="start_time" name="start_time" required>
+        <input type="datetime-local" name="start_time" required>
         
         <label for="end_time">End Time:</label>
-        <input type="datetime-local" id="end_time" name="end_time" required>
-    
-        <label for="data_types">Select Data Types:</label>
-        <select id="data_types" name="data_types" multiple>
-            <option value="flow">Water Flow</option>
-            <option value="Water_temp">Water Temperature</option>
-            <option value="DHT_temp">DHT Temperature</option>
-            <option value="DHT_hum">DHT Humidity</option>
-        </select>
-    
-        <button type="submit">Generate Graph</button>
+        <input type="datetime-local" name="end_time" required>
+
+        <p>Select Data Types:</p>
+        <input type="checkbox" name="data_types" value="flow"> Water Flow <br>
+        <input type="checkbox" name="data_types" value="Water_temp"> Water Temp <br>
+        <input type="checkbox" name="data_types" value="DHT_temp"> DHT Temp <br>
+        <input type="checkbox" name="data_types" value="DHT_hum"> DHT Humidity <br>
+
+        <button type="submit">Generate Plot</button>
     </form>
     
 </body>
