@@ -19,10 +19,22 @@
         <input type="datetime-local" name="end_time" required>
 
         <p>Select Data Types:</p>
-        <input type="checkbox" name="data_types" value="flow"> Water Flow <br>
-        <input type="checkbox" name="data_types" value="Water_temp"> Water Temp <br>
-        <input type="checkbox" name="data_types" value="DHT_temp"> DHT Temp <br>
-        <input type="checkbox" name="data_types" value="DHT_hum"> DHT Humidity <br>
+        <div class="checkbox-group">
+            <input type="checkbox" name="data_types" value="flow"> 
+            <label>Water Flow</label>
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" name="data_types" value="Water_temp"> 
+            <label>Water Temp</label>
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" name="data_types" value="DHT_temp"> 
+            <label>DHT Temp</label>
+        </div>
+        <div class="checkbox-group">
+            <input type="checkbox" name="data_types" value="DHT_hum"> 
+            <label>DHT Humidity</label>
+        </div>
 
         <button type="submit">Generate Plot</button>
     </form>
