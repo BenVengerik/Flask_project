@@ -12,10 +12,10 @@ DB_PATH = "/Users/Ben/Documents/Flask_project/Databases/dblog.db"
 
 # Assign colors to each data type for consistency
 DATA_TYPE_COLORS = {
-    "water_flow": "b",       # Blue
-    "water_temp": "r",       # Red
+    "flow": "b",       # Blue
+    "Water_temp": "r",       # Red
     "DHT_temp": "g",         # Green
-    "DHT_humidity": "orange" # Orange
+    "DHT_hum": "orange" # Orange
 }
 
 def generate_plot(start_time, end_time, data_types):
@@ -60,7 +60,6 @@ def generate_plot(start_time, end_time, data_types):
         line, = ax.plot(timestamps, values, linestyle="-", color=color, label=data_type)
         ax.set_ylabel(data_type, color=color)
         ax.yaxis.label.set_color(color)  # Set axis label color
-        ax.tick_params(axis="y", colors=color)  # Ensure tick labels are colored correctly
         ax_objects[data_type] = ax  # Store axis for later reference
 
         
