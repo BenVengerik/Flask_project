@@ -1,72 +1,82 @@
+/* Style for the body element */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: Arial, sans-serif; /* Use Arial font */
+    background-color: #f4f4f4; /* Light gray background */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Arrange children in a column */
+    justify-content: center; /* Center children vertically */
+    align-items: center; /* Center children horizontally */
+    height: 100vh; /* Full viewport height */
 }
 
+/* Style for the form element */
 form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    background: #fff; /* White background */
+    padding: 20px; /* Padding inside the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+    width: 300px; /* Fixed width */
 }
 
+/* Style for the h1 element */
 h1 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 50px;
+    text-align: center; /* Center the text */
+    color: #333; /* Dark gray color */
+    margin-bottom: 50px; /* Space below the heading */
 }
 
+/* Style for the label element */
 label {
-    display: block;
-    margin-bottom: 8px;
-    color: #555;
+    display: block; /* Block-level element */
+    margin-bottom: 8px; /* Space below the label */
+    color: #555; /* Medium gray color */
 }
 
+/* Style for the datetime-local input element */
 input[type="datetime-local"] {
     width: calc(100% - 8px); /* Adjust width to account for padding */
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 8px; /* Padding inside the input */
+    margin-bottom: 10px; /* Space below the input */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
     box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
+/* Style for the checkbox group */
 .checkbox-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 10px; /* Space below the group */
 }
 
+/* Style for the checkbox input element */
 .checkbox-group input[type="checkbox"] {
-    margin-right: 10px;
+    margin-right: 10px; /* Space to the right of the checkbox */
     margin-top: 0; /* Align checkbox with label */
 }
 
+/* Style for the checkbox label element */
 .checkbox-group label {
     margin: 0; /* Remove default margin */
     margin-left: 5px; /* Add some space between the checkbox and the label */
 }
 
+/* Style for the button element */
 button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside the button */
+    background-color: #007BFF; /* Blue background */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    color: white; /* White text */
+    font-size: 16px; /* Larger text */
+    cursor: pointer; /* Pointer cursor on hover */
     margin-top: 10px; /* Add some space above the button */
 }
 
+/* Style for the button element on hover */
 button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker blue background on hover */
 }

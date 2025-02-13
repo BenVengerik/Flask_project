@@ -19,6 +19,18 @@ DATA_TYPE_COLORS = {
 }
 
 def generate_plot(start_time, end_time, data_types):
+    """
+    Generates a plot for the given data types within the specified time range.
+
+    Parameters:
+    start_time (str): The start time for the data range in 'YYYY-MM-DD HH:MM:SS' format.
+    end_time (str): The end time for the data range in 'YYYY-MM-DD HH:MM:SS' format.
+    data_types (list): A list of data types to plot.
+
+    Returns:
+    BytesIO: A BytesIO object containing the plot image in PNG format, or None if no data is available.
+    """
+    # Connect to the SQLite database
     con = sqlite3.connect(DB_PATH)
     cursor = con.cursor()
 
@@ -34,17 +46,21 @@ def generate_plot(start_time, end_time, data_types):
     data = cursor.fetchall()
     con.close()
 
+    # Return None if no data is available
     if not data:
         return None
 
+    # Parse timestamps from the data
     timestamps = [datetime.datetime.strptime(row[0], "%Y-%m-%d %H:%M:%S") for row in data]
 
+    # Create a new figure and axis for the plot
     fig, ax1 = plt.subplots(figsize=(10, 5))
 
     # The first axis (ax1) is for the first selected data type
     primary_axis = True
     ax_objects = {}
 
+    # Plot each data type on the graph
     for i, data_type in enumerate(data_types):
         values = [row[i + 1] for row in data]  # Offset by 1 because row[0] is timestamp
         color = DATA_TYPE_COLORS.get(data_type, f"C{i}")  # Use default Matplotlib colors if not found
@@ -56,13 +72,13 @@ def generate_plot(start_time, end_time, data_types):
             ax = ax1.twinx()  # Create a secondary axis
             ax.spines["right"].set_position(("outward", 60 * (len(ax_objects) - 1)))  # Space out multiple Y-axes
     
-        # Explicitly set color of both the line and axis labels
+        # Plot the data on the axis
         line, = ax.plot(timestamps, values, linestyle="-", color=color, label=data_type)
         ax.set_ylabel(data_type, color=color)
         ax.yaxis.label.set_color(color)  # Set axis label color
         ax_objects[data_type] = ax  # Store axis for later reference
 
-        
+    # Set the x-axis label and title
     ax1.set_xlabel("Timestamp")
     ax1.set_title("Sensor Data Over Time")
     ax1.tick_params(axis='x', rotation=45)
@@ -76,6 +92,7 @@ def generate_plot(start_time, end_time, data_types):
         labels.extend(l)
     ax1.legend(handles, labels, loc="upper left")
 
+    # Save the plot to a BytesIO object
     img = io.BytesIO()
     fig.savefig(img, format="png", bbox_inches="tight")
     img.seek(0)
