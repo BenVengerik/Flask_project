@@ -39,11 +39,11 @@ This is a Flask-based web application that generates and serves plots based on u
 
 ## Project Structure
 
-- [Databases]: Contains the SQLite database file.
-- [styles]: Contains the CSS stylesheets.
-- [templates]): Contains the HTML templates.
-- [server.py]: The main Flask application file.
-- [plotter.py]: Contains the function to generate plots.
+- [Databases](https://github.com/BenVengerik/Flask_project/tree/main/Databases): Contains the SQLite database file.
+- [styles](https://github.com/BenVengerik/Flask_project/tree/main/static/styles): Contains the CSS stylesheets.
+- [templates](https://github.com/BenVengerik/Flask_project/tree/main/templates): Contains the HTML templates.
+- [server.py](https://github.com/BenVengerik/Flask_project/blob/main/server.py): The main Flask application file.
+- [plotter.py](https://github.com/BenVengerik/Flask_project/blob/main/plotter.py): Contains the function to generate plots.
 - `requirements.txt`: Lists the project dependencies.
 
 ## Endpoints
