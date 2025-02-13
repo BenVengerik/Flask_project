@@ -39,11 +39,11 @@ This is a Flask-based web application that generates and serves plots based on u
 
 ## Project Structure
 
-- [Databases](http://_vscodecontentref_/0): Contains the SQLite database file.
-- [styles](http://_vscodecontentref_/1): Contains the CSS stylesheets.
-- [templates](http://_vscodecontentref_/2): Contains the HTML templates.
-- [server.py](http://_vscodecontentref_/3): The main Flask application file.
-- [plotter.py](http://_vscodecontentref_/4): Contains the function to generate plots.
+- [Databases]: Contains the SQLite database file.
+- [styles]: Contains the CSS stylesheets.
+- [templates]): Contains the HTML templates.
+- [server.py]: The main Flask application file.
+- [plotter.py]: Contains the function to generate plots.
 - `requirements.txt`: Lists the project dependencies.
 
 ## Endpoints
