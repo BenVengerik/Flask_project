@@ -14,6 +14,13 @@ def index():
     """
     return render_template('index.html')
 
+@app.route("/range", methods=["GET","POST"])
+def range():
+    """
+    Renders the range.html template.
+    """
+    return render_template('range.html')
+
 # Define the route for generating and serving the plot
 @app.route("/plot", methods=["GET","POST"])
 def plot():
@@ -40,6 +47,30 @@ def plot():
 
     # Send the plot image as a response
     return send_file(img, mimetype="image/png")
+
+
+@app.route('/dashboard')
+def dashboard():
+    """
+    Renders the dashboard.html template.
+    """
+    return render_template('dashboard.html')
+
+@app.route("/plot/<data_type>")
+def live_plot(data_type):
+    """
+    Generates a live plot for a specific data type.
+    """
+    from datetime import datetime, timedelta
+    end_time = datetime.now()
+    start_time = end_time - timedelta(hours=0.1)  # Show the last 0.1 hour(s) of data
+
+    img = generate_plot(start_time.strftime("%Y-%m-%d %H:%M:%S"), 
+                        end_time.strftime("%Y-%m-%d %H:%M:%S"), 
+                        [data_type])
+
+    return send_file(img, mimetype="image/png")
+
 
 # Run the application using the Waitress server
 if __name__ == '__main__':

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Dashboard</title>
+    <script>
+        function updateGraphs() {
+            document.getElementById('flow-plot').src = "/plot/flow?" + new Date().getTime();
+            document.getElementById('water-temp-plot').src = "/plot/Water_temp?" + new Date().getTime();
+            document.getElementById('dht-temp-plot').src = "/plot/DHT_temp?" + new Date().getTime();
+            document.getElementById('dht-hum-plot').src = "/plot/DHT_hum?" + new Date().getTime();
+        }
+
+        setInterval(updateGraphs, 3000); // Update every 3 seconds
+    </script>
+</head>
+<body>
+    <h1>Live Sensor Data Dashboard</h1>
+    <div>
+        <h2>Water Flow</h2>
+        <img id="flow-plot" src="/plot/flow" width="600">
+    </div>
+    <div>
+        <h2>Water Temperature</h2>
+        <img id="water-temp-plot" src="/plot/Water_temp" width="600">
+    </div>
+    <div>
+        <h2>DHT Temperature</h2>
+        <img id="dht-temp-plot" src="/plot/DHT_temp" width="600">
+    </div>
+    <div>
+        <h2>DHT Humidity</h2>
+        <img id="dht-hum-plot" src="/plot/DHT_hum" width="600">
+    </div>
+
+    <a href="/index">Back</a>
+
+</body>
+</html>

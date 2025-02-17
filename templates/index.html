@@ -10,43 +10,10 @@
 </head>
 
 <body>
-    <h1>Select Time Range & Data Types</h1>
     
-    <!-- Form for selecting time range and data types -->
-    <form action="/plot" method="POST">
-        <!-- Input for start time -->
-        <label for="start_time">Start Time:</label>
-        <input type="datetime-local" name="start_time" required>
-        
-        <!-- Input for end time -->
-        <label for="end_time">End Time:</label>
-        <input type="datetime-local" name="end_time" required>
-
-        <p>Select Data Types:</p>
-        <!-- Checkbox for selecting Water Flow data type -->
-        <div class="checkbox-group">
-            <input type="checkbox" name="data_types" value="flow"> 
-            <label>Water Flow</label>
-        </div>
-        <!-- Checkbox for selecting Water Temp data type -->
-        <div class="checkbox-group">
-            <input type="checkbox" name="data_types" value="Water_temp"> 
-            <label>Water Temp</label>
-        </div>
-        <!-- Checkbox for selecting DHT Temp data type -->
-        <div class="checkbox-group">
-            <input type="checkbox" name="data_types" value="DHT_temp"> 
-            <label>DHT Temp</label>
-        </div>
-        <!-- Checkbox for selecting DHT Humidity data type -->
-        <div class="checkbox-group">
-            <input type="checkbox" name="data_types" value="DHT_hum"> 
-            <label>DHT Humidity</label>
-        </div>
-
-        <!-- Button to submit the form and generate the plot -->
-        <button type="submit">Generate Plot</button>
-    </form>
+    <h1>Home</h1>
+    <a href="/dashboard">Live Dashboard</a>
+    <a href="/range">Time Ranges</a>
     
 </body>
 
