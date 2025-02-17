@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 import datetime
 import io
 
+import numpy as np
+from scipy.optimize import curve_fit
+
 # Database file path
 DB_PATH = "/Users/Ben/Documents/Flask_project/Databases/dblog.db"
 
@@ -17,6 +20,22 @@ DATA_TYPE_COLORS = {
     "DHT_temp": "g",         # Green
     "DHT_hum": "orange" # Orange
 }
+
+# Given calibration data
+resistance_values = np.array([332776, 96481, 32566, 12486, 10000, 5331, 2490, 1071, 678.1, 387.3])  # Ohms
+temperature_values = np.array([-40, -20, 0, 20, 25, 40, 60, 85, 100, 120])  # Celsius
+
+# Define logarithmic model
+def log_fit(R, A, B):
+    return A + B * np.log(R)
+
+# Fit the curve to find A and B
+params, _ = curve_fit(log_fit, resistance_values, temperature_values)
+A_fit, B_fit = params
+
+def resistance_to_temperature(resistance):
+    """Convert resistance to temperature using the logarithmic model."""
+    return A_fit + B_fit * np.log(resistance)
 
 def generate_plot(start_time, end_time, data_types):
     """
@@ -65,6 +84,9 @@ def generate_plot(start_time, end_time, data_types):
         values = [row[i + 1] for row in data]  # Offset by 1 because row[0] is timestamp
         color = DATA_TYPE_COLORS.get(data_type, f"C{i}")  # Use default Matplotlib colors if not found
     
+        if data_type == "Water_temp":
+            values = resistance_to_temperature(values)  # Convert using log model
+        
         if primary_axis:
             ax = ax1  # First plot uses the main axis
             primary_axis = False
