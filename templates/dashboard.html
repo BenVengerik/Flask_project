@@ -12,7 +12,9 @@
             document.getElementById('dht-hum-plot').src = "/plot/DHT_hum?" + new Date().getTime();
         }
 
-        setInterval(updateGraphs, 3000); // Update every 3 seconds
+        var updateTime = {{ settings['update_time'] }};
+
+        setInterval(updateGraphs, updateTime*100); // Time in seconds
     </script>
 </head>
 <body>
