@@ -16,6 +16,14 @@
     <br>
     <a href="/dashboard">Live Dashboard</a>
     <a href="/range">Time Ranges</a>
+
+    <h2>Set Database Path</h2>
+    <form method="POST" action="/index" enctype="multipart/form-data">
+        <label for="db_path">Database Path:</label>
+        <input type="file" id="db_path" name="db_path">
+        <input type="hidden" name="current_db_path" value="{{ settings['db_path'] }}">
+        <button type="submit">Save Database Path</button>
+    </form>
     
 </body>
 

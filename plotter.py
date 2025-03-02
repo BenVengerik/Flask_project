@@ -10,17 +10,6 @@ import io
 import numpy as np
 from scipy.optimize import curve_fit
 
-# Database file path
-DB_PATH = "/Users/Ben/Documents/Flask_project/Databases/dblog.db"
-
-# Assign colors to each data type for consistency
-DATA_TYPE_COLORS = {
-    "flow": "b",       # Blue
-    "Water_temp": "r",       # Red
-    "DHT_temp": "g",         # Green
-    "DHT_hum": "orange" # Orange
-}
-
 # Given calibration data
 resistance_values = np.array([332776, 96481, 32566, 12486, 10000, 5331, 2490, 1071, 678.1, 387.3])  # Ohms
 temperature_values = np.array([-40, -20, 0, 20, 25, 40, 60, 85, 100, 120])  # Celsius
@@ -37,7 +26,7 @@ def resistance_to_temperature(resistance):
     """Convert resistance to temperature using the logarithmic model."""
     return A_fit + B_fit * np.log(resistance)
 
-def generate_plot(start_time, end_time, data_types):
+def generate_plot(start_time, end_time, data_types, db_path, data_type_colors):
     """
     Generates a plot for the given data types within the specified time range.
 
@@ -45,12 +34,14 @@ def generate_plot(start_time, end_time, data_types):
     start_time (str): The start time for the data range in 'YYYY-MM-DD HH:MM:SS' format.
     end_time (str): The end time for the data range in 'YYYY-MM-DD HH:MM:SS' format.
     data_types (list): A list of data types to plot.
+    db_path (str): The path to the SQLite database file.
+    data_type_colors (dict): A dictionary mapping data types to colors.
 
     Returns:
     BytesIO: A BytesIO object containing the plot image in PNG format, or None if no data is available.
     """
     # Connect to the SQLite database
-    con = sqlite3.connect(DB_PATH)
+    con = sqlite3.connect(db_path)
     cursor = con.cursor()
 
     # Convert list of selected data types into a SQL column selection
@@ -82,7 +73,7 @@ def generate_plot(start_time, end_time, data_types):
     # Plot each data type on the graph
     for i, data_type in enumerate(data_types):
         values = [row[i + 1] for row in data]  # Offset by 1 because row[0] is timestamp
-        color = DATA_TYPE_COLORS.get(data_type, f"C{i}")  # Use default Matplotlib colors if not found
+        color = data_type_colors.get(data_type, f"C{i}")  # Use default Matplotlib colors if not found
     
         if data_type == "Water_temp":
             values = resistance_to_temperature(values)  # Convert using log model

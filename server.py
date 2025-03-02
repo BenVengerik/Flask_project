@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, send_file, redirect, url_for,
 from waitress import serve
 from plotter import generate_plot
 import json
+import os
 
 # Initialize the Flask application
 app = Flask(__name__)
@@ -18,7 +19,14 @@ except (FileNotFoundError, json.JSONDecodeError):
     settings = {
         "update_time": 3,
         "data_period": 30,
-        "alert_thresholds": "placeholder"
+        "alert_thresholds": "placeholder",
+        "db_path": "/Users/Ben/Documents/Flask_project/Databases/dblog.db",
+        "data_type_colors": {
+            "flow": "b",
+            "Water_temp": "r",
+            "DHT_temp": "g",
+            "DHT_hum": "orange"
+        }
     }
 
 # Define the route for the home page
@@ -26,9 +34,24 @@ except (FileNotFoundError, json.JSONDecodeError):
 @app.route('/index', methods=["GET", "POST"])
 def index():
     """
-    Renders the index.html template.
+    Renders the index.html template and handles the form submission for setting the database path.
     """
-    return render_template('index.html')
+    if request.method == "POST":
+        if 'db_path' in request.files and request.files['db_path'].filename != '':
+            db_path_file = request.files['db_path']
+            db_path = os.path.join("/Users/Ben/Documents/Flask_project/Databases", db_path_file.filename)
+            db_path_file.save(db_path)
+            settings["db_path"] = db_path
+        else:
+            settings["db_path"] = request.form["current_db_path"]
+
+        # Save settings to file
+        with open(SETTINGS_FILE, "w") as f:
+            json.dump(settings, f)
+
+        return redirect(url_for("index"))
+
+    return render_template('index.html', settings=settings)
 
 @app.route('/admin/login', methods=["GET", "POST"])
 def admin_login():
@@ -99,7 +122,9 @@ def live_plot(data_type):
 
     img = generate_plot(start_time.strftime("%Y-%m-%d %H:%M:%S"), 
                         end_time.strftime("%Y-%m-%d %H:%M:%S"), 
-                        [data_type])
+                        [data_type], 
+                        settings["db_path"], 
+                        settings["data_type_colors"])
 
     return send_file(img, mimetype="image/png")
 
@@ -128,7 +153,7 @@ def plot():
         return "Please select at least one data type.", 400  
 
     # Generate the plot image
-    img = generate_plot(start_time, end_time, data_types)
+    img = generate_plot(start_time, end_time, data_types, settings["db_path"], settings["data_type_colors"])
 
     # Check if the plot generation was successful
     if img is None:
