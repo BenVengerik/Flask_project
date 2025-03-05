@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Range</title>
-    <!-- Link to the external stylesheet -->
-    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
-</head>
+{% block title %}Time Ranges{% endblock %}
 
-<body>
+{% block content %}
     <h1>Select Time Range & Data Types</h1>
     
     <!-- Form for selecting time range and data types -->
@@ -50,6 +43,4 @@
 
     <a href="/index">Back</a>
     
-</body>
-
-</html>
+{% endblock %}

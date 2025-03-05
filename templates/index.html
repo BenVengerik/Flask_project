@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
-    <!-- Link to the external stylesheet -->
-    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
-</head>
+{% block title %}Index{% endblock %}
 
-<body>
-    
+{% block content %}
     <h1>Home</h1>
-    <a href="/admin">Admin Dashboard</a> 
-    <br>
-    <a href="/dashboard">Live Dashboard</a>
-    <a href="/range">Time Ranges</a>
 
     <h2>Set Database Path</h2>
     <form method="POST" action="/index" enctype="multipart/form-data">
@@ -24,7 +12,4 @@
         <input type="hidden" name="current_db_path" value="{{ settings['db_path'] }}">
         <button type="submit">Save Database Path</button>
     </form>
-    
-</body>
-
-</html>
+{% endblock %}

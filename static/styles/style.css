@@ -1,14 +1,48 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* Style for the body element */
 body {
     font-family: Arial, sans-serif; /* Use Arial font */
     background-color: #f4f4f4; /* Light gray background */
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
     display: flex; /* Use flexbox layout */
     flex-direction: column; /* Arrange children in a column */
-    justify-content: center; /* Center children vertically */
+    min-height: 100vh; /* Full viewport height */
+}
+
+/* Style for the navigation bar */
+nav {
+    width: 100%; /* Full width */
+    background-color: #007BFF; /* Blue background */
+    padding: 10px 20px; /* Padding inside the nav */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    display: flex; /* Use flexbox layout */
+    justify-content: space-between; /* Space between links */
+    align-items: center; /* Center items vertically */
+}
+
+nav a {
+    margin-right: 20px; /* Space between links */
+    text-decoration: none; /* Remove underline */
+    color: white; /* White text */
+    font-weight: bold; /* Bold text */
+}
+
+nav a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Style for the main content area */
+main {
+    flex: 1; /* Take up remaining space */
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Arrange children in a column */
     align-items: center; /* Center children horizontally */
-    height: 100vh; /* Full viewport height */
+    padding: 20px; /* Padding inside the main area */
 }
 
 /* Style for the form element */
@@ -16,15 +50,24 @@ form {
     background: #fff; /* White background */
     padding: 20px; /* Padding inside the form */
     border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow */
-    width: 300px; /* Fixed width */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    width: 100%; /* Full width */
+    max-width: 400px; /* Max width */
+    margin-bottom: 20px; /* Space below the form */
 }
 
 /* Style for the h1 element */
 h1 {
     text-align: center; /* Center the text */
     color: #333; /* Dark gray color */
-    margin-bottom: 50px; /* Space below the heading */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+/* Style for the h2 element */
+h2 {
+    text-align: center; /* Center the text */
+    color: #333; /* Dark gray color */
+    margin-bottom: 10px; /* Space below the heading */
 }
 
 /* Style for the label element */
@@ -34,10 +77,13 @@ label {
     color: #555; /* Medium gray color */
 }
 
-/* Style for the datetime-local input element */
+/* Style for the input elements */
+input[type="file"],
+input[type="number"],
+input[type="text"],
 input[type="datetime-local"] {
-    width: calc(100% - 8px); /* Adjust width to account for padding */
-    padding: 8px; /* Padding inside the input */
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside the input */
     margin-bottom: 10px; /* Space below the input */
     border: 1px solid #ccc; /* Light gray border */
     border-radius: 4px; /* Rounded corners */
@@ -79,4 +125,67 @@ button {
 /* Style for the button element on hover */
 button:hover {
     background-color: #0056b3; /* Darker blue background on hover */
+}
+
+/* Style for flash messages */
+.flash-container {
+    position: fixed; /* Fixed position */
+    bottom: 20px; /* 20px from the bottom */
+    right: 20px; /* 20px from the right */
+    z-index: 1000; /* Ensure it is above other elements */
+}
+
+.flashes {
+    list-style-type: none; /* Remove list bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+.flashes li {
+    padding: 10px; /* Padding inside the message */
+    margin-bottom: 10px; /* Space below the message */
+    border-radius: 4px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+}
+
+.flashes li.error {
+    background-color: #f8d7da; /* Light red background */
+    color: #721c24; /* Dark red text */
+    border: 1px solid #f5c6cb; /* Light red border */
+}
+
+.flashes li.success {
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb; /* Light green border */
+}
+
+/* Style for images */
+img {
+    max-width: 100%; /* Responsive width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+/* Style for the dashboard grid */
+.dashboard-grid {
+    display: grid; /* Use grid layout */
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    grid-template-rows: 1fr 1fr; /* Two rows */
+    gap: 20px; /* Space between grid items */
+    width: 100%; /* Full width */
+    max-width: 1200px; /* Max width */
+    margin: 20px auto; /* Center the grid */
+}
+
+/* Style for the dashboard grid items */
+.dashboard-grid div {
+    background: #fff; /* White background */
+    padding: 20px; /* Padding inside the grid item */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center children horizontally */
 }

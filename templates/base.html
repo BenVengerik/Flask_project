@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Flask App{% endblock %}</title>
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
+</head>
+
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/dashboard">Live Dashboard</a>
+        <a href="/range">Time Ranges</a>
+        <a href="/admin">Admin Dashboard</a>
+    </nav>
+
+    <div class="flash-container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+  </div>
+
+  {% block content %}{% endblock %}
+
+  {% block scripts %}
+  <script>
+      // Function to remove flash messages after a few seconds
+      setTimeout(function() {
+          var flashes = document.querySelector('.flashes');
+          if (flashes) {
+              flashes.style.display = 'none';
+          }
+      }, 2000); // 2000 milliseconds = 2 seconds
+  </script>
+  {% endblock %}
+</body>
+
+</html>
