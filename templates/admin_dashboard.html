@@ -7,13 +7,13 @@
     <form method="POST" action="/admin">
         <h3>Live Dashboard Settings</h3>
         <label for="update_time">Update Time (seconds):</label>
-        <input type="number" id="update_time" name="update_time" required>
+        <input type="number" id="update_time" name="update_time" value="{{ settings['update_time'] }}" required>
         
         <label for="data_period">Data Period (minutes):</label>
-        <input type="number" id="data_period" name="data_period" required>
+        <input type="number" id="data_period" name="data_period" value="{{ settings['data_period'] }}" required>
         
         <label for="alert_thresholds">Alert Thresholds:</label>
-        <input type="text" id="alert_thresholds" name="alert_thresholds" required>
+        <input type="text" id="alert_thresholds" name="alert_thresholds" value="{{ settings['alert_thresholds'] }}" required>
         
         <button type="submit">Save Settings</button>
     </form>
