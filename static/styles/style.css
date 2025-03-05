@@ -12,6 +12,7 @@ body {
     display: flex; /* Use flexbox layout */
     flex-direction: column; /* Arrange children in a column */
     min-height: 100vh; /* Full viewport height */
+    align-items: center; /* Center body content horizontally */
 }
 
 /* Style for the navigation bar */
@@ -23,6 +24,10 @@ nav {
     display: flex; /* Use flexbox layout */
     justify-content: space-between; /* Space between links */
     align-items: center; /* Center items vertically */
+    position: fixed; /* Fix the nav bar at the top */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    z-index: 1000; /* Ensure it is above other elements */
 }
 
 nav a {
@@ -42,7 +47,9 @@ main {
     display: flex; /* Use flexbox layout */
     flex-direction: column; /* Arrange children in a column */
     align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
     padding: 20px; /* Padding inside the main area */
+    margin-top: 60px; /* Space below the nav bar */
 }
 
 /* Style for the form element */
@@ -54,6 +61,7 @@ form {
     width: 100%; /* Full width */
     max-width: 400px; /* Max width */
     margin-bottom: 20px; /* Space below the form */
+    text-align: center; /* Center the text */
 }
 
 /* Style for the settings form */
@@ -72,6 +80,7 @@ form {
 h1 {
     text-align: center; /* Center the text */
     color: #333; /* Dark gray color */
+    margin-top: 70px; /* Space below the heading */
     margin-bottom: 20px; /* Space below the heading */
 }
 
