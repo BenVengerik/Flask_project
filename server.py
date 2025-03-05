@@ -80,7 +80,7 @@ def admin_login():
 def admin_logout():
     session.pop("admin_logged_in", None)
     flash("Logged out successfully.")
-    return redirect(url_for("admin_login"))
+    return redirect(url_for("index"))
 
 @app.route('/admin', methods=["GET", "POST"])
 def admin_dashboard():
