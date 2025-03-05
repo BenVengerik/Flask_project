@@ -129,6 +129,38 @@ def dashboard():
 
     return render_template("dashboard.html", settings=settings)
 
+@app.route("/plot/check")
+def check_data():
+    """
+    Checks if data is available for the selected time range.
+    """
+    from datetime import datetime, timedelta
+    try:
+        end_time = datetime.now()
+        start_time = end_time - timedelta(minutes=settings["data_period"])
+
+        # Check if data is available
+        con = sqlite3.connect(settings["db_path"])
+        cursor = con.cursor()
+        query = f"""
+        SELECT COUNT(*) 
+        FROM temlog 
+        WHERE timestamp BETWEEN '{start_time.strftime("%Y-%m-%d %H:%M:%S")}' AND '{end_time.strftime("%Y-%m-%d %H:%M:%S")}'
+        """
+        cursor.execute(query)
+        count = cursor.fetchone()[0]
+        con.close()
+
+        if count == 0:
+            return "No data available", 400
+        return "Data available", 200
+    except sqlite3.Error as e:
+        flash(f"An error occurred while accessing the database: {e}", "error")
+        return "Database error", 500
+    except Exception as e:
+        flash(f"An error occurred while checking data availability: {e}", "error")
+        return "Error checking data availability", 500
+
 @app.route("/plot/<data_type>")
 def live_plot(data_type):
     """

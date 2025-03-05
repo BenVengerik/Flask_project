@@ -4,22 +4,22 @@
 
 {% block content %}
     <h1>Live Sensor Data Dashboard</h1>
-    <div class="dashboard-grid">
+    <div class="dashboard-grid" id="dashboard-grid">
         <div>
             <h2>Water Flow</h2>
-            <img id="flow-plot" src="/plot/flow" width="600">
+            <img id="flow-plot" src="" width="600">
         </div>
         <div>
             <h2>Water Temperature</h2>
-            <img id="water-temp-plot" src="/plot/Water_temp" width="600">
+            <img id="water-temp-plot" src="" width="600">
         </div>
         <div>
             <h2>DHT Temperature</h2>
-            <img id="dht-temp-plot" src="/plot/DHT_temp" width="600">
+            <img id="dht-temp-plot" src="" width="600">
         </div>
         <div>
             <h2>DHT Humidity</h2>
-            <img id="dht-hum-plot" src="/plot/DHT_hum" width="600">
+            <img id="dht-hum-plot" src="" width="600">
         </div>
     </div>
     <div id="no-data-message" style="display: none;">
@@ -31,71 +31,53 @@
 
 {% block scripts %}
     <script>
-        function updateGraphs() {
-            fetch("/plot/flow")
+        function checkDataAvailability() {
+            fetch("/plot/check")
                 .then(response => {
-                    if (response.status === 400) {
-                        throw new Error("No data available");
+                    if (response.status === 200) {
+                        updateGraphs();
+                        setInterval(updateGraphs, updateTime * 1000); // Time in seconds
+                    } else {
+                        showNoDataMessage();
                     }
-                    return response.blob();
-                })
-                .then(blob => {
-                    document.getElementById('flow-plot').src = URL.createObjectURL(blob);
                 })
                 .catch(error => {
                     showNoDataMessage();
+                });
+        }
+
+        function updateGraphs() {
+            fetch("/plot/flow")
+                .then(response => response.blob())
+                .then(blob => {
+                    document.getElementById('flow-plot').src = URL.createObjectURL(blob);
                 });
 
             fetch("/plot/Water_temp")
-                .then(response => {
-                    if (response.status === 400) {
-                        throw new Error("No data available");
-                    }
-                    return response.blob();
-                })
+                .then(response => response.blob())
                 .then(blob => {
                     document.getElementById('water-temp-plot').src = URL.createObjectURL(blob);
-                })
-                .catch(error => {
-                    showNoDataMessage();
                 });
 
             fetch("/plot/DHT_temp")
-                .then(response => {
-                    if (response.status === 400) {
-                        throw new Error("No data available");
-                    }
-                    return response.blob();
-                })
+                .then(response => response.blob())
                 .then(blob => {
                     document.getElementById('dht-temp-plot').src = URL.createObjectURL(blob);
-                })
-                .catch(error => {
-                    showNoDataMessage();
                 });
 
             fetch("/plot/DHT_hum")
-                .then(response => {
-                    if (response.status === 400) {
-                        throw new Error("No data available");
-                    }
-                    return response.blob();
-                })
+                .then(response => response.blob())
                 .then(blob => {
                     document.getElementById('dht-hum-plot').src = URL.createObjectURL(blob);
-                })
-                .catch(error => {
-                    showNoDataMessage();
                 });
         }
 
         function showNoDataMessage() {
-            document.querySelector('.dashboard-grid').style.display = 'none';
+            document.getElementById('dashboard-grid').style.display = 'none';
             document.getElementById('no-data-message').style.display = 'block';
-            clearInterval(updateInterval);
         }
 
         var updateTime = {{ settings['update_time'] }};
-        var updateInterval = setInterval(updateGraphs, updateTime * 1000); // Time in seconds
+        checkDataAvailability();
     </script>
 {% endblock %}
