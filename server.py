@@ -4,6 +4,7 @@ from plotter import generate_plot
 import json
 import os
 import sqlite3
+import csv
 
 # Initialize the Flask application
 app = Flask(__name__)
@@ -199,7 +200,7 @@ def range():
     return render_template('range.html')
 
 # Define the route for generating and serving the plot
-@app.route("/plot", methods=["GET","POST"])
+@app.route("/plot", methods=["POST"])
 def plot():
     """
     Generates a plot based on the provided start time, end time, and data types.
@@ -220,12 +221,10 @@ def plot():
         # Generate the plot image
         img = generate_plot(start_time, end_time, data_types, settings["db_path"], settings["data_type_colors"])
 
-        # Check if the plot generation was successful
         if img is None:
             flash("No data available for the selected time range.", "error")
             return "No data available for the selected time range.", 400  
 
-        # Send the plot image as a response
         return send_file(img, mimetype="image/png")
     except sqlite3.Error as e:
         flash(f"An error occurred while accessing the database: {e}", "error")
@@ -233,6 +232,113 @@ def plot():
     except Exception as e:
         flash(f"An error occurred while generating the plot: {e}", "error")
         return "Error generating plot", 500
+
+@app.route("/generate_plot", methods=["POST"])
+def generate_plot_route():
+    """
+    Generates a plot based on the provided start and end time, and data types.
+    Renders the plot_result.html template with the plot image and download options.
+    """
+    try:
+        # Get the start and end time from the form data
+        start_time = request.form["start_time"]
+        end_time = request.form["end_time"]
+        # Get the selected data types as a list
+        data_types = request.form.getlist("data_types")
+
+        # Check if at least one data type is selected
+        if not data_types:
+            flash("Please select at least one data type.", "error")
+            return redirect(url_for("range"))
+
+        # Generate the plot image
+        img = generate_plot(start_time, end_time, data_types, settings["db_path"], settings["data_type_colors"])
+
+        if img is None:
+            flash("No data available for the selected time range.", "error")
+            return redirect(url_for("range"))
+
+        # Save the plot image to the static folder
+        plot_path = os.path.join(app.static_folder, "plot.png")
+        with open(plot_path, "wb") as f:
+            f.write(img.getbuffer())
+
+        # Render the plot_result.html template with the plot image and download options
+        return render_template("plot_result.html", plot_url=url_for('static', filename='plot.png'), start_time=start_time, end_time=end_time, data_types=",".join(data_types))
+    except sqlite3.Error as e:
+        flash(f"An error occurred while accessing the database: {e}", "error")
+        return redirect(url_for("range"))
+    except Exception as e:
+        flash(f"An error occurred while generating the plot: {e}", "error")
+        return redirect(url_for("range"))
+
+@app.route("/export_plot", methods=["POST"])
+def export_plot():
+    """
+    Exports the plot image based on the provided start time, end time, and data types.
+    """
+    try:
+        # Get the start and end time from the form data
+        start_time = request.form["start_time"]
+        end_time = request.form["end_time"]
+        # Get the selected data types as a list
+        data_types = request.form["data_types"].split(',')
+
+        # Generate the plot image
+        img = generate_plot(start_time, end_time, data_types, settings["db_path"], settings["data_type_colors"])
+
+        if img is None:
+            flash("No data available for the selected time range.", "error")
+            return redirect(url_for("range"))
+
+        return send_file(img, mimetype="image/png", as_attachment=True, download_name="plot.png")
+    except sqlite3.Error as e:
+        flash(f"An error occurred while accessing the database: {e}", "error")
+        return redirect(url_for("range"))
+    except Exception as e:
+        flash(f"An error occurred while exporting the plot: {e}", "error")
+        return redirect(url_for("range"))
+
+@app.route("/download_data", methods=["POST"])
+def download_data():
+    """
+    Downloads the raw data based on the provided start time, end time, and data types.
+    """
+    try:
+        # Get the start and end time from the form data
+        start_time = request.form["start_time"]
+        end_time = request.form["end_time"]
+        # Get the selected data types as a list
+        data_types = request.form["data_types"].split(',')
+
+        # Connect to the database
+        con = sqlite3.connect(settings["db_path"])
+        cursor = con.cursor()
+
+        # Query to get the raw data
+        query = f"""
+        SELECT timestamp, {', '.join(data_types)}
+        FROM temlog
+        WHERE timestamp BETWEEN '{start_time}' AND '{end_time}'
+        """
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        con.close()
+
+        # Create a CSV file with the raw data
+        csv_file = "/tmp/raw_data.csv"
+        with open(csv_file, "w") as f:
+            writer = csv.writer(f)
+            writer.writerow(["timestamp"] + data_types)
+            writer.writerows(rows)
+
+        return send_file(csv_file, mimetype="text/csv", as_attachment=True, download_name="raw_data.csv")
+    except sqlite3.Error as e:
+        flash(f"An error occurred while accessing the database: {e}", "error")
+        return redirect(url_for("range"))
+    except Exception as e:
+        flash(f"An error occurred while downloading the data: {e}", "error")
+        return redirect(url_for("range"))
 
 @app.route("/update_settings", methods=["POST"])
 def update_settings():

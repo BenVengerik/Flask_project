@@ -6,7 +6,7 @@
     <h1>Select Time Range & Data Types</h1>
     
     <!-- Form for selecting time range and data types -->
-    <form action="/plot" method="POST">
+    <form action="/generate_plot" method="POST">
         <!-- Input for start time -->
         <label for="start_time">Start Time:</label>
         <input type="datetime-local" name="start_time" required>
@@ -42,5 +42,4 @@
     </form>
 
     <a href="/index">Back</a>
-    
 {% endblock %}

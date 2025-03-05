@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Plot Result{% endblock %}
+
+{% block content %}
+    <h1>Plot Result</h1>
+    
+    <img src="{{ url_for('static', filename='plot.png') }}" alt="Generated Plot">
+
+    <form action="/export_plot" method="POST">
+        <input type="hidden" name="start_time" value="{{ start_time }}">
+        <input type="hidden" name="end_time" value="{{ end_time }}">
+        <input type="hidden" name="data_types" value="{{ data_types }}">
+        <button type="submit">Export Plot Image</button>
+    </form>
+
+    <form action="/download_data" method="POST">
+        <input type="hidden" name="start_time" value="{{ start_time }}">
+        <input type="hidden" name="end_time" value="{{ end_time }}">
+        <input type="hidden" name="data_types" value="{{ data_types }}">
+        <button type="submit">Download Raw Data</button>
+    </form>
+
+    <a href="/range">Back</a>
+{% endblock %}
