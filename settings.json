@@ -1,12 +1,1 @@
-{
-    "update_time": 3,
-    "data_period": 10,
-    "alert_thresholds": "placeholder",
-    "db_path": "/Users/Ben/Documents/Flask_project/Databases/dblog.db",
-    "data_type_colors": {
-        "flow": "b",
-        "Water_temp": "r",
-        "DHT_temp": "g",
-        "DHT_hum": "orange"
-    }
-}
+{"update_time": 3, "data_period": 10, "alert_thresholds": "placeholder", "db_path": "/Users/Ben/Documents/Flask_project/Databases/dblog.db", "data_type_colors": {"flow": "b", "Water_temp": "r", "DHT_temp": "g", "DHT_hum": "orange"}}

@@ -4,6 +4,7 @@
 
 {% block content %}
     <h1>Live Sensor Data Dashboard</h1>
+    
     <div class="dashboard-grid" id="dashboard-grid">
         <div>
             <h2>Water Flow</h2>
@@ -26,7 +27,16 @@
         <p>No data available for the selected time range. Please check the database.</p>
         <button onclick="location.reload();">Reload Page</button>
     </div>
-    <a href="/index">Back</a>
+
+    <form id="settings-form" method="POST" action="/update_settings" class="settings-form">
+        <label for="data_period">Data Period (minutes):</label>
+        <input type="number" id="data_period" name="data_period" value="{{ settings['data_period'] }}" required>
+        
+        <label for="update_time">Update Time (seconds):</label>
+        <input type="number" id="update_time" name="update_time" value="{{ settings['update_time'] }}" required>
+        
+        <button type="submit">Update Settings</button>
+    </form>
 {% endblock %}
 
 {% block scripts %}
@@ -79,5 +89,29 @@
 
         var updateTime = {{ settings['update_time'] }};
         checkDataAvailability();
+
+        document.getElementById('settings-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var dataPeriod = document.getElementById('data_period').value;
+            var updateTime = document.getElementById('update_time').value;
+
+            fetch('/update_settings', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data_period: dataPeriod,
+                    update_time: updateTime
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Failed to update settings');
+                }
+            });
+        });
     </script>
 {% endblock %}

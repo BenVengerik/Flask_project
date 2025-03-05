@@ -129,6 +129,8 @@ def dashboard():
 
     return render_template("dashboard.html", settings=settings)
 
+
+
 @app.route("/plot/check")
 def check_data():
     """
@@ -232,6 +234,24 @@ def plot():
         flash(f"An error occurred while generating the plot: {e}", "error")
         return "Error generating plot", 500
 
+@app.route("/update_settings", methods=["POST"])
+def update_settings():
+    """
+    Updates the data period and update time settings.
+    """
+    try:
+        data = request.get_json()
+        settings["data_period"] = int(data["data_period"])
+        settings["update_time"] = int(data["update_time"])
+
+        # Save settings to file
+        with open(SETTINGS_FILE, "w") as f:
+            json.dump(settings, f)
+
+        return "Settings updated successfully", 200
+    except Exception as e:
+        flash(f"An error occurred while updating settings: {e}", "error")
+        return "Error updating settings", 500
 
 # Run the application using the Waitress server
 if __name__ == '__main__':

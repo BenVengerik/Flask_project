@@ -56,6 +56,18 @@ form {
     margin-bottom: 20px; /* Space below the form */
 }
 
+/* Style for the settings form */
+.settings-form {
+    background: #fff; /* White background */
+    padding: 10px; /* Padding inside the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    width: 100%; /* Full width */
+    max-width: 300px; /* Smaller max width */
+    margin: 20px auto; /* Center the form */
+    text-align: center; /* Center the text */
+}
+
 /* Style for the h1 element */
 h1 {
     text-align: center; /* Center the text */
@@ -188,4 +200,11 @@ img {
     display: flex; /* Use flexbox layout */
     flex-direction: column; /* Arrange children in a column */
     align-items: center; /* Center children horizontally */
+}
+
+.dashboard-grid img {
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
 }
