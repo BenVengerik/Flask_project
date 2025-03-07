@@ -30,6 +30,7 @@ python-dotenv==1.0.1
 pytz==2024.1
 regex==2024.7.24
 requests==2.32.3
+scipy==1.15.2
 seaborn==0.13.2
 setuptools==69.5.1
 six==1.16.0

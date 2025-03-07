@@ -63,6 +63,9 @@ def index():
 
 @app.route('/admin/login', methods=["GET", "POST"])
 def admin_login():
+    """
+    Renders the admin login page and handles the login form submission.
+    """
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -79,12 +82,18 @@ def admin_login():
 
 @app.route('/admin/logout')
 def admin_logout():
+    """
+    Logs out the admin user and redirects to the dashboard.
+    """
     session.pop("admin_logged_in", None)
     flash("Logged out successfully.")
     return redirect(url_for("dashboard"))
 
 @app.route('/admin', methods=["GET", "POST"])
 def admin_dashboard():
+    """
+    Renders the admin dashboard and handles the form submission for updating settings.
+    """
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
     
@@ -119,6 +128,9 @@ def admin_dashboard():
 
 @app.route('/admin/update_db_path', methods=["POST"])
 def update_db_path():
+    """
+    Handles the form submission for updating the database path.
+    """
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
     try:
@@ -140,9 +152,11 @@ def update_db_path():
         flash(f"An error occurred while updating the database path: {e}", "error")
         return redirect(url_for("admin_dashboard"))
 
-
 @app.route('/admin/execute_query', methods=["POST"])
 def execute_query():
+    """
+    Handles the form submission for executing SQL queries.
+    """
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
     try:
@@ -172,10 +186,12 @@ def execute_query():
     except Exception as e:
         flash(f"An error occurred: {e}", "error")
         return redirect(url_for("admin_dashboard"))
-    
 
 @app.route('/admin/execute_cli', methods=["POST"])
 def execute_cli():
+    """
+    Handles the form submission for executing CLI commands.
+    """
     if not session.get("admin_logged_in"):
         return redirect(url_for("admin_login"))
     try:
@@ -192,7 +208,6 @@ def execute_cli():
     except Exception as e:
         flash(f"An error occurred while executing the CLI command: {e}", "error")
         return redirect(url_for("admin_dashboard"))
-    
 
 @app.route('/dashboard')
 def dashboard():
@@ -275,7 +290,6 @@ def range():
     """
     return render_template('range.html')
 
-# Define the route for generating and serving the plot
 @app.route("/plot", methods=["POST"])
 def plot():
     """

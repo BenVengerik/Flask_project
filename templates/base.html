@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <!-- Navigation Bar -->
     <nav>
         <a href="/dashboard">Live Dashboard</a>
         <a href="/range">Generate Plots</a>
@@ -20,6 +21,7 @@
         {% endif %}
     </nav>
 
+    <!-- Flash Messages Container -->
     <div class="flash-container">
       {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -30,21 +32,23 @@
           </ul>
         {% endif %}
       {% endwith %}
-  </div>
+    </div>
 
-  {% block content %}{% endblock %}
+    <!-- Main Content Block -->
+    {% block content %}{% endblock %}
 
-  {% block scripts %}
-  <script>
-      // Function to remove flash messages after a few seconds
-      setTimeout(function() {
-          var flashes = document.querySelector('.flashes');
-          if (flashes) {
-              flashes.style.display = 'none';
-          }
-      }, 3000); // 3000 milliseconds = 3 seconds
-  </script>
-  {% endblock %}
+    <!-- Scripts Block -->
+    {% block scripts %}
+    <script>
+        // Function to remove flash messages after a few seconds
+        setTimeout(function() {
+            var flashes = document.querySelector('.flashes');
+            if (flashes) {
+                flashes.style.display = 'none';
+            }
+        }, 3000); // 3000 milliseconds = 3 seconds
+    </script>
+    {% endblock %}
 </body>
 
 </html>

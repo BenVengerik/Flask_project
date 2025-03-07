@@ -16,6 +16,17 @@ temperature_values = np.array([-40, -20, 0, 20, 25, 40, 60, 85, 100, 120])  # Ce
 
 # Define logarithmic model
 def log_fit(R, A, B):
+    """
+    Logarithmic model for fitting resistance to temperature.
+    
+    Parameters:
+    R (float): Resistance value.
+    A (float): Intercept of the logarithmic model.
+    B (float): Slope of the logarithmic model.
+    
+    Returns:
+    float: Calculated temperature.
+    """
     return A + B * np.log(R)
 
 # Fit the curve to find A and B
@@ -23,7 +34,15 @@ params, _ = curve_fit(log_fit, resistance_values, temperature_values)
 A_fit, B_fit = params
 
 def resistance_to_temperature(resistance):
-    """Convert resistance to temperature using the logarithmic model."""
+    """
+    Convert resistance to temperature using the logarithmic model.
+    
+    Parameters:
+    resistance (float): Resistance value.
+    
+    Returns:
+    float: Calculated temperature.
+    """
     return A_fit + B_fit * np.log(resistance)
 
 def generate_plot(start_time, end_time, data_types, db_path, data_type_colors):

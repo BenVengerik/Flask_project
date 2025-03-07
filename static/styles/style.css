@@ -15,7 +15,7 @@ body {
     align-items: center; /* Center body content horizontally */
 }
 
-/* Style for the navigation bar */
+/* Navigation Bar Styles */
 nav {
     width: 100%; /* Full width */
     background-color: #007BFF; /* Blue background */
@@ -41,39 +41,35 @@ nav a:hover {
     text-decoration: underline; /* Underline on hover */
 }
 
-/* Style for the login button */
-.login-button {
-    background-color: #0056b3; /* Dark blue background */
-    color: #fff; /* White text */
+/* Button Styles */
+.login-button, .logout-button {
     padding: 10px 20px; /* Padding inside the button */
     border: none; /* Remove border */
     border-radius: 4px; /* Rounded corners */
     cursor: pointer; /* Pointer cursor on hover */
     text-decoration: none; /* Remove underline */
     font-size: 16px; /* Increase font size */
+}
+
+.login-button {
+    background-color: #0056b3; /* Dark blue background */
+    color: #fff; /* White text */
 }
 
 .login-button:hover {
     background-color: #003d80; /* Darker blue on hover */
 }
 
-/* Style for the logout button */
 .logout-button {
     background-color: #FF4136; /* Red background */
     color: #fff; /* White text */
-    padding: 10px 20px; /* Padding inside the button */
-    border: none; /* Remove border */
-    border-radius: 4px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    text-decoration: none; /* Remove underline */
-    font-size: 16px; /* Increase font size */
 }
 
 .logout-button:hover {
     background-color: #C0392B; /* Darker red on hover */
 }
 
-/* Style for the main content area */
+/* Main Content Area Styles */
 main {
     flex: 1; /* Take up remaining space */
     display: flex; /* Use flexbox layout */
@@ -84,7 +80,7 @@ main {
     margin-top: 60px; /* Space below the nav bar */
 }
 
-/* Style for the form element */
+/* Form Styles */
 form {
     background: #fff; /* White background */
     padding: 20px; /* Padding inside the form */
@@ -97,7 +93,7 @@ form {
     word-wrap: break-word; /* Break long words */
 }
 
-/* Style for the settings form */
+/* Settings Form Styles */
 .settings-form {
     background: #fff; /* White background */
     padding: 10px; /* Padding inside the form */
@@ -109,40 +105,34 @@ form {
     text-align: center; /* Center the text */
 }
 
-/* Style for the h1 element */
-h1 {
+/* Heading Styles */
+h1, h2, h3 {
     text-align: center; /* Center the text */
     color: #333; /* Dark gray color */
+}
+
+h1 {
     margin-top: 70px; /* Space below the heading */
     margin-bottom: 20px; /* Space below the heading */
 }
 
-/* Style for the h2 element */
-h2 {
-    text-align: center; /* Center the text */
-    color: #333; /* Dark gray color */
+h2, h3 {
     margin-bottom: 10px; /* Space below the heading */
 }
 
-/* Style for the h3 element */
-h3 {
-    text-align: center; /* Center the text */
-    color: #333; /* Dark gray color */
-    margin-bottom: 10px; /* Space below the heading */
-}
-
-/* Style for the label element */
+/* Label Styles */
 label {
     display: block; /* Block-level element */
     margin-bottom: 8px; /* Space below the label */
     color: #555; /* Medium gray color */
 }
 
-/* Style for the input elements */
+/* Input and Textarea Styles */
 input[type="file"],
 input[type="number"],
 input[type="text"],
-input[type="datetime-local"] {
+input[type="datetime-local"],
+textarea {
     width: 100%; /* Full width */
     padding: 10px; /* Padding inside the input */
     margin-bottom: 10px; /* Space below the input */
@@ -151,37 +141,28 @@ input[type="datetime-local"] {
     box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
-/* Style for the textarea elements */
 textarea {
-    width: 100%; /* Full width */
-    padding: 10px; /* Padding inside the textarea */
-    margin-bottom: 10px; /* Space below the textarea */
-    border: 1px solid #ccc; /* Light gray border */
-    border-radius: 4px; /* Rounded corners */
-    box-sizing: border-box; /* Ensure padding is included in the width */
     resize: vertical; /* Allow vertical resizing only */
 }
 
-/* Style for the checkbox group */
+/* Checkbox Group Styles */
 .checkbox-group {
     display: flex; /* Use flexbox layout */
     align-items: center; /* Center items vertically */
     margin-bottom: 10px; /* Space below the group */
 }
 
-/* Style for the checkbox input element */
 .checkbox-group input[type="checkbox"] {
     margin-right: 10px; /* Space to the right of the checkbox */
     margin-top: 0; /* Align checkbox with label */
 }
 
-/* Style for the checkbox label element */
 .checkbox-group label {
     margin: 0; /* Remove default margin */
     margin-left: 5px; /* Add some space between the checkbox and the label */
 }
 
-/* Style for the button element */
+/* Button Styles */
 button {
     width: 100%; /* Full width */
     padding: 10px; /* Padding inside the button */
@@ -194,12 +175,11 @@ button {
     margin-top: 10px; /* Add some space above the button */
 }
 
-/* Style for the button element on hover */
 button:hover {
     background-color: #0056b3; /* Darker blue background on hover */
 }
 
-/* Style for flash messages */
+/* Flash Message Styles */
 .flash-container {
     position: fixed; /* Fixed position */
     bottom: 20px; /* 20px from the bottom */
@@ -233,15 +213,7 @@ button:hover {
     border: 1px solid #c3e6cb; /* Light green border */
 }
 
-.flashes .error {
-    color: #FF4136; /* Red text for error messages */
-}
-
-.flashes .success {
-    color: #2ECC40; /* Green text for success messages */
-}
-
-/* Style for images */
+/* Image Styles */
 img {
     max-width: 100%; /* Responsive width */
     height: auto; /* Maintain aspect ratio */
@@ -249,7 +221,7 @@ img {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
 }
 
-/* Style for the dashboard grid */
+/* Dashboard Grid Styles */
 .dashboard-grid {
     display: grid; /* Use grid layout */
     grid-template-columns: 1fr 1fr; /* Two columns */
@@ -260,7 +232,6 @@ img {
     margin: 20px auto; /* Center the grid */
 }
 
-/* Style for the dashboard grid items */
 .dashboard-grid div {
     background: #fff; /* White background */
     padding: 20px; /* Padding inside the grid item */
@@ -278,7 +249,7 @@ img {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
 }
 
-/* Ensure the current database path text wraps properly */
+/* Current Database Path Styles */
 .current-db-path {
     word-wrap: break-word; /* Break long words */
     white-space: pre-wrap; /* Preserve whitespace and wrap text */
@@ -286,7 +257,7 @@ img {
     color: #555; /* Medium gray color */
 }
 
-/* Style for the admin grid */
+/* Admin Grid Styles */
 .admin-grid {
     display: grid; /* Use grid layout */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
@@ -297,7 +268,6 @@ img {
     padding: 20px; /* Padding around the grid */
 }
 
-/* Style for the admin grid items */
 .admin-grid-item {
     background: #fff; /* White background */
     padding: 20px; /* Padding inside the grid item */
@@ -309,7 +279,7 @@ img {
     text-align: left; /* Align text to the left */
 }
 
-/* Style for the login container */
+/* Login Container Styles */
 .login-container {
     max-width: 400px; /* Max width */
     margin: 100px auto; /* Center the container */
@@ -320,20 +290,20 @@ img {
     text-align: center; /* Center the text */
 }
 
-/* Style for the login form */
+/* Login Form Styles */
 .login-container form {
     display: flex; /* Use flexbox layout */
     flex-direction: column; /* Arrange children in a column */
     gap: 10px; /* Space between form elements */
 }
 
-/* Style for the form labels */
+/* Login Form Label Styles */
 .login-container label {
     text-align: left; /* Align text to the left */
     font-weight: bold; /* Bold text */
 }
 
-/* Style for the form inputs */
+/* Login Form Input Styles */
 .login-container input {
     padding: 10px; /* Padding inside the input */
     border: 1px solid #ccc; /* Light gray border */
@@ -341,7 +311,7 @@ img {
     box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
-/* Style for the login button */
+/* Login Button Styles */
 .login-container button {
     background-color: #0056b3; /* Dark blue background */
     color: #fff; /* White text */

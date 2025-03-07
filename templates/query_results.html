@@ -6,6 +6,7 @@
     <h1>Query Results</h1>
     
     {% if rows %}
+     <!-- Display the query results in a table -->
         <table>
             <thead>
                 <tr>
@@ -25,8 +26,8 @@
             </tbody>
         </table>
     {% else %}
+    <!-- Message if no results are found -->
         <p>No results found.</p>
     {% endif %}
-    
-    <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+
 {% endblock %}

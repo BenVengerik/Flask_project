@@ -9,8 +9,11 @@
 </head>
 
 <body>
+    <!-- Login Container -->
     <div class="login-container">
         <h2>Admin Login</h2>
+        
+        <!-- Login Form -->
         <form method="POST" action="{{ url_for('admin_login') }}">
             <div class="form-group">
                 <label for="username">Username:</label>
@@ -22,6 +25,8 @@
             </div>
             <button type="submit">Login</button>
         </form>
+        
+        <!-- Flash Messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 <div class="flashes">

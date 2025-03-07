@@ -5,7 +5,10 @@
 {% block content %}
     <h1>Admin Dashboard</h1>
     
+    <!-- Admin Grid Container -->
     <div class="admin-grid">
+        
+        <!-- Live Dashboard Settings Form -->
         <div class="admin-grid-item">
             <form method="POST" action="/admin/update_settings">
                 <h3>Live Dashboard Settings</h3>
@@ -22,6 +25,7 @@
             </form>
         </div>
         
+        <!-- Update Database Path Form -->
         <div class="admin-grid-item">
             <form method="POST" action="/admin/update_db_path" enctype="multipart/form-data">
                 <h3>Database Path</h3>
@@ -32,24 +36,25 @@
             </form>
         </div>
         
+        <!-- Execute SQL Query Form -->
         <div class="admin-grid-item">
             <form method="POST" action="/admin/execute_query">
                 <h3>SQL Query</h3>
-                                <textarea id="sql_query" name="sql_query" rows="4" cols="50" required></textarea>
+                <textarea id="sql_query" name="sql_query" rows="4" cols="50" required></textarea>
                 
                 <button type="submit">Execute Query</button>
             </form>
         </div>
         
+        <!-- Execute CLI Command Form -->
         <div class="admin-grid-item">
             <form method="POST" action="/admin/execute_cli">
                 <h3>Command Line Interface</h3>
-                                <textarea id="cli_command" name="cli_command" rows="4" cols="50" required></textarea>
+                <textarea id="cli_command" name="cli_command" rows="4" cols="50" required></textarea>
                 
                 <button type="submit">Execute Command</button>
             </form>
         </div>
     </div>
-    
-    <a href="{{ url_for('admin_logout') }}">Logout</a>
+
 {% endblock %}

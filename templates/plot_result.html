@@ -5,8 +5,10 @@
 {% block content %}
     <h1>Plot Result</h1>
     
+    <!-- Display the generated plot image -->
     <img src="{{ url_for('static', filename='plot.png') }}" alt="Generated Plot">
 
+    <!-- Form to export the plot image -->
     <form action="/export_plot" method="POST">
         <input type="hidden" name="start_time" value="{{ start_time }}">
         <input type="hidden" name="end_time" value="{{ end_time }}">
@@ -14,12 +16,11 @@
         <button type="submit">Export Plot Image</button>
     </form>
 
+    <!-- Form to download the raw data -->
     <form action="/download_data" method="POST">
         <input type="hidden" name="start_time" value="{{ start_time }}">
         <input type="hidden" name="end_time" value="{{ end_time }}">
         <input type="hidden" name="data_types" value="{{ data_types }}">
         <button type="submit">Download Raw Data</button>
     </form>
-
-    <a href="/range">Back</a>
 {% endblock %}

@@ -5,6 +5,7 @@
 {% block content %}
     <h1>Live Sensor Data Dashboard</h1>
     
+    <!-- Dashboard Grid Container -->
     <div class="dashboard-grid" id="dashboard-grid">
         <div>
             <h2>Water Flow</h2>
@@ -23,11 +24,14 @@
             <img id="dht-hum-plot" src="" width="600">
         </div>
     </div>
+    
+    <!-- No Data Message -->
     <div id="no-data-message" style="display: none;">
         <p>No data available for the selected time range. Please check the database.</p>
         <button onclick="location.reload();">Reload Page</button>
     </div>
 
+    <!-- Settings Form -->
     <form id="settings-form" method="POST" action="/update_settings" class="settings-form">
         <label for="data_period">Data Period (minutes):</label>
         <input type="number" id="data_period" name="data_period" value="{{ settings['data_period'] }}" required>
@@ -41,6 +45,7 @@
 
 {% block scripts %}
     <script>
+        // Function to check data availability
         function checkDataAvailability() {
             fetch("/plot/check")
                 .then(response => {
@@ -56,6 +61,7 @@
                 });
         }
 
+        // Function to update graphs
         function updateGraphs() {
             fetch("/plot/flow")
                 .then(response => response.blob())
@@ -82,14 +88,17 @@
                 });
         }
 
+        // Function to show no data message
         function showNoDataMessage() {
             document.getElementById('dashboard-grid').style.display = 'none';
             document.getElementById('no-data-message').style.display = 'block';
         }
 
+        // Initial data availability check
         var updateTime = {{ settings['update_time'] }};
         checkDataAvailability();
 
+        // Handle settings form submission
         document.getElementById('settings-form').addEventListener('submit', function(event) {
             event.preventDefault();
             var dataPeriod = document.getElementById('data_period').value;

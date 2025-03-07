@@ -5,14 +5,16 @@
 {% block content %}
     <h1>CLI Command Results</h1>
     
+    <!-- Display the executed command -->
     <h3>Command:</h3>
     <pre>{{ command }}</pre>
     
+    <!-- Display the output of the command -->
     <h3>Output:</h3>
     <pre>{{ output }}</pre>
     
+    <!-- Display any errors from the command -->
     <h3>Error:</h3>
     <pre>{{ error }}</pre>
-    
-    <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+
 {% endblock %}
