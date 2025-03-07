@@ -67,7 +67,7 @@ def admin_login():
         username = request.form["username"]
         password = request.form["password"]
         
-        if username == "admin" and password == "password":  # Change these later!
+        if username == "admin" and password == "password":  # HARD CODED PASSWORD
             session["admin_logged_in"] = True
             flash("Logged in successfully.")
             return redirect(url_for("admin_dashboard"))
@@ -193,7 +193,7 @@ def execute_cli():
         flash(f"An error occurred while executing the CLI command: {e}", "error")
         return redirect(url_for("admin_dashboard"))
     
-    
+
 @app.route('/dashboard')
 def dashboard():
     """

@@ -41,6 +41,22 @@ nav a:hover {
     text-decoration: underline; /* Underline on hover */
 }
 
+/* Style for the login button */
+.login-button {
+    background-color: #0056b3; /* Dark blue background */
+    color: #fff; /* White text */
+    padding: 10px 20px; /* Padding inside the button */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-decoration: none; /* Remove underline */
+    font-size: 16px; /* Increase font size */
+}
+
+.login-button:hover {
+    background-color: #003d80; /* Darker blue on hover */
+}
+
 /* Style for the logout button */
 .logout-button {
     background-color: #FF4136; /* Red background */
@@ -195,6 +211,7 @@ button:hover {
     list-style-type: none; /* Remove list bullets */
     padding: 0; /* Remove padding */
     margin: 0; /* Remove margin */
+    margin-top: 20px; /* Space above the flash messages */
 }
 
 .flashes li {
@@ -214,6 +231,14 @@ button:hover {
     background-color: #d4edda; /* Light green background */
     color: #155724; /* Dark green text */
     border: 1px solid #c3e6cb; /* Light green border */
+}
+
+.flashes .error {
+    color: #FF4136; /* Red text for error messages */
+}
+
+.flashes .success {
+    color: #2ECC40; /* Green text for success messages */
 }
 
 /* Style for images */
@@ -282,4 +307,51 @@ img {
     flex-direction: column; /* Arrange children in a column */
     align-items: center; /* Center children horizontally */
     text-align: left; /* Align text to the left */
+}
+
+/* Style for the login container */
+.login-container {
+    max-width: 400px; /* Max width */
+    margin: 100px auto; /* Center the container */
+    padding: 20px; /* Padding inside the container */
+    background: #fff; /* White background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    text-align: center; /* Center the text */
+}
+
+/* Style for the login form */
+.login-container form {
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Arrange children in a column */
+    gap: 10px; /* Space between form elements */
+}
+
+/* Style for the form labels */
+.login-container label {
+    text-align: left; /* Align text to the left */
+    font-weight: bold; /* Bold text */
+}
+
+/* Style for the form inputs */
+.login-container input {
+    padding: 10px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+/* Style for the login button */
+.login-container button {
+    background-color: #0056b3; /* Dark blue background */
+    color: #fff; /* White text */
+    padding: 10px 20px; /* Padding inside the button */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Increase font size */
+}
+
+.login-container button:hover {
+    background-color: #003d80; /* Darker blue on hover */
 }
