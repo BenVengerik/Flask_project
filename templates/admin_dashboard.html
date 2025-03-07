@@ -4,18 +4,52 @@
 
 {% block content %}
     <h1>Admin Dashboard</h1>
-    <form method="POST" action="/admin">
-        <h3>Live Dashboard Settings</h3>
-        <label for="update_time">Update Time (seconds):</label>
-        <input type="number" id="update_time" name="update_time" value="{{ settings['update_time'] }}" required>
+    
+    <div class="admin-grid">
+        <div class="admin-grid-item">
+            <form method="POST" action="/admin/update_settings">
+                <h3>Live Dashboard Settings</h3>
+                <label for="update_time">Update Time (seconds):</label>
+                <input type="number" id="update_time" name="update_time" value="{{ settings['update_time'] }}" required>
+                
+                <label for="data_period">Data Period (minutes):</label>
+                <input type="number" id="data_period" name="data_period" value="{{ settings['data_period'] }}" required>
+                
+                <label for="alert_thresholds">Alert Thresholds:</label>
+                <input type="text" id="alert_thresholds" name="alert_thresholds" value="{{ settings['alert_thresholds'] }}" required>
+                
+                <button type="submit">Save Settings</button>
+            </form>
+        </div>
         
-        <label for="data_period">Data Period (minutes):</label>
-        <input type="number" id="data_period" name="data_period" value="{{ settings['data_period'] }}" required>
+        <div class="admin-grid-item">
+            <form method="POST" action="/admin/update_db_path" enctype="multipart/form-data">
+                <h3>Database Path</h3>
+                <p class="current-db-path">Current Database Path: {{ settings['db_path'] }}</p>
+                <input type="file" id="db_path" name="db_path">
+                                
+                <button type="submit">Update Database Path</button>
+            </form>
+        </div>
         
-        <label for="alert_thresholds">Alert Thresholds:</label>
-        <input type="text" id="alert_thresholds" name="alert_thresholds" value="{{ settings['alert_thresholds'] }}" required>
+        <div class="admin-grid-item">
+            <form method="POST" action="/admin/execute_query">
+                <h3>SQL Query</h3>
+                                <textarea id="sql_query" name="sql_query" rows="4" cols="50" required></textarea>
+                
+                <button type="submit">Execute Query</button>
+            </form>
+        </div>
         
-        <button type="submit">Save Settings</button>
-    </form>
+        <div class="admin-grid-item">
+            <form method="POST" action="/admin/execute_cli">
+                <h3>Command Line Interface</h3>
+                                <textarea id="cli_command" name="cli_command" rows="4" cols="50" required></textarea>
+                
+                <button type="submit">Execute Command</button>
+            </form>
+        </div>
+    </div>
+    
     <a href="{{ url_for('admin_logout') }}">Logout</a>
 {% endblock %}

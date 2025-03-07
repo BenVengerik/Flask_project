@@ -4,16 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Flask App{% endblock %}</title>
+    <title>{% block title %}Flask Project{% endblock %}</title>
     <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet" />
 </head>
 
 <body>
     <nav>
-        <a href="/">Home</a>
         <a href="/dashboard">Live Dashboard</a>
-        <a href="/range">Time Ranges</a>
+        <a href="/range">Generate Plots</a>
         <a href="/admin">Admin Dashboard</a>
+        {% if session.get('admin_logged_in') %}
+            <a href="/admin/logout" class="logout-button">Logout</a>
+        {% endif %}
     </nav>
 
     <div class="flash-container">

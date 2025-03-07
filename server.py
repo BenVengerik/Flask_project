@@ -5,6 +5,7 @@ import json
 import os
 import sqlite3
 import csv
+import subprocess
 
 # Initialize the Flask application
 app = Flask(__name__)
@@ -80,7 +81,7 @@ def admin_login():
 def admin_logout():
     session.pop("admin_logged_in", None)
     flash("Logged out successfully.")
-    return redirect(url_for("index"))
+    return redirect(url_for("dashboard"))
 
 @app.route('/admin', methods=["GET", "POST"])
 def admin_dashboard():
@@ -116,6 +117,83 @@ def admin_dashboard():
 
     return render_template("admin_dashboard.html", settings=settings)
 
+@app.route('/admin/update_db_path', methods=["POST"])
+def update_db_path():
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("admin_login"))
+    try:
+        if 'db_path' in request.files and request.files['db_path'].filename != '':
+            db_path_file = request.files['db_path']
+            db_path = os.path.join("/Users/Ben/Documents/Flask_project/Databases", db_path_file.filename)
+            db_path_file.save(db_path)
+            settings["db_path"] = db_path
+            
+            # Save settings to file
+            with open(SETTINGS_FILE, "w") as f:
+                json.dump(settings, f)
+
+            flash("Database path updated successfully.")
+        else:
+            flash("No file selected for updating the database path.", "error")
+        return redirect(url_for("admin_dashboard"))
+    except Exception as e:
+        flash(f"An error occurred while updating the database path: {e}", "error")
+        return redirect(url_for("admin_dashboard"))
+
+
+@app.route('/admin/execute_query', methods=["POST"])
+def execute_query():
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("admin_login"))
+    try:
+        sql_query = request.form["sql_query"]
+        
+        # Connect to the database
+        con = sqlite3.connect(settings["db_path"])
+        cursor = con.cursor()
+        
+        # Execute the query
+        cursor.execute(sql_query)
+        con.commit()
+        
+        # Fetch the results if it's a SELECT query
+        if sql_query.strip().lower().startswith("select"):
+            rows = cursor.fetchall()
+            columns = [description[0] for description in cursor.description]
+            con.close()
+            return render_template("query_results.html", rows=rows, columns=columns)
+        
+        con.close()
+        flash("Query executed successfully.")
+        return redirect(url_for("admin_dashboard"))
+    except sqlite3.Error as e:
+        flash(f"An error occurred while executing the query: {e}", "error")
+        return redirect(url_for("admin_dashboard"))
+    except Exception as e:
+        flash(f"An error occurred: {e}", "error")
+        return redirect(url_for("admin_dashboard"))
+    
+
+@app.route('/admin/execute_cli', methods=["POST"])
+def execute_cli():
+    if not session.get("admin_logged_in"):
+        return redirect(url_for("admin_login"))
+    try:
+        cli_command = request.form["cli_command"]
+        
+        # Execute the CLI command
+        result = subprocess.run(cli_command, shell=True, capture_output=True, text=True)
+        
+        # Capture the output and errors
+        output = result.stdout
+        error = result.stderr
+        
+        return render_template("cli_results.html", command=cli_command, output=output, error=error)
+    except Exception as e:
+        flash(f"An error occurred while executing the CLI command: {e}", "error")
+        return redirect(url_for("admin_dashboard"))
+    
+    
 @app.route('/dashboard')
 def dashboard():
     """
@@ -126,11 +204,9 @@ def dashboard():
             settings = json.load(f)
     except Exception as e:
         flash(f"An error occurred while loading settings: {e}", "error")
-        return redirect(url_for("index"))
+        return redirect(url_for("dashboard"))
 
     return render_template("dashboard.html", settings=settings)
-
-
 
 @app.route("/plot/check")
 def check_data():

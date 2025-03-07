@@ -41,6 +41,22 @@ nav a:hover {
     text-decoration: underline; /* Underline on hover */
 }
 
+/* Style for the logout button */
+.logout-button {
+    background-color: #FF4136; /* Red background */
+    color: #fff; /* White text */
+    padding: 10px 20px; /* Padding inside the button */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-decoration: none; /* Remove underline */
+    font-size: 16px; /* Increase font size */
+}
+
+.logout-button:hover {
+    background-color: #C0392B; /* Darker red on hover */
+}
+
 /* Style for the main content area */
 main {
     flex: 1; /* Take up remaining space */
@@ -62,6 +78,7 @@ form {
     max-width: 400px; /* Max width */
     margin-bottom: 20px; /* Space below the form */
     text-align: center; /* Center the text */
+    word-wrap: break-word; /* Break long words */
 }
 
 /* Style for the settings form */
@@ -91,6 +108,13 @@ h2 {
     margin-bottom: 10px; /* Space below the heading */
 }
 
+/* Style for the h3 element */
+h3 {
+    text-align: center; /* Center the text */
+    color: #333; /* Dark gray color */
+    margin-bottom: 10px; /* Space below the heading */
+}
+
 /* Style for the label element */
 label {
     display: block; /* Block-level element */
@@ -109,6 +133,17 @@ input[type="datetime-local"] {
     border: 1px solid #ccc; /* Light gray border */
     border-radius: 4px; /* Rounded corners */
     box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+/* Style for the textarea elements */
+textarea {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside the textarea */
+    margin-bottom: 10px; /* Space below the textarea */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+    resize: vertical; /* Allow vertical resizing only */
 }
 
 /* Style for the checkbox group */
@@ -216,4 +251,35 @@ img {
     height: auto; /* Maintain aspect ratio */
     border-radius: 4px; /* Rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+/* Ensure the current database path text wraps properly */
+.current-db-path {
+    word-wrap: break-word; /* Break long words */
+    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+    margin-bottom: 10px; /* Space below the text */
+    color: #555; /* Medium gray color */
+}
+
+/* Style for the admin grid */
+.admin-grid {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+    gap: 20px; /* Space between grid items */
+    width: 100%; /* Full width */
+    max-width: 1200px; /* Max width */
+    margin: 20px auto; /* Center the grid */
+    padding: 20px; /* Padding around the grid */
+}
+
+/* Style for the admin grid items */
+.admin-grid-item {
+    background: #fff; /* White background */
+    padding: 20px; /* Padding inside the grid item */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center children horizontally */
+    text-align: left; /* Align text to the left */
 }

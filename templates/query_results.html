@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Query Results{% endblock %}
+
+{% block content %}
+    <h1>Query Results</h1>
+    
+    {% if rows %}
+        <table>
+            <thead>
+                <tr>
+                    {% for column in columns %}
+                        <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in rows %}
+                    <tr>
+                        {% for value in row %}
+                            <td>{{ value }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+    
+    <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+{% endblock %}
