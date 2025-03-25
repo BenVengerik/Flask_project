@@ -38,6 +38,14 @@ This is a Flask-based web application that generates and serves plots based on u
 
 2. Open your web browser and navigate to `http://localhost:8000`.
 
+3.	You can navigate the different pages by using the banner at the top of the page.
+
+4.	The main page will display the live dashboard. You can change the period of displayed data and the frequency of graph updates using the form at the bottom of the page.
+
+5.	If you navigate to the “Generate Plots” page, you will be able to generates plots for any data type and from any period where data is available. Choose which the start and end time and what data types you want to display and click generate plot. A plot will be generated, displaying the data. This plot can be exported as image or as raw data (csv file).
+
+6.	If you navigate to the “Admin Dashboard” you will be prompted with a log-in page. To log in, input ‘admin’ as username and ‘password’ as password. In the admin dashboard, you will be able to make many changes. You will be able to update the live dashboard settings, including the alert threshold, which currently is only a place holder. You will also be able to update the database path in case the database is in a different location. You will also be able to interface directly with the terminal using the SQL query and command line interfaces.
+
 ## Project Structure
 
 - [Databases](https://github.com/BenVengerik/Flask_project/tree/main/Databases): Contains the SQLite database file.
