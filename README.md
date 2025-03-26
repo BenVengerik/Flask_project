@@ -29,6 +29,9 @@ This is a Flask-based web application that generates and serves plots based on u
     pip install -r requirements.txt
     ```
 
+4. Set database path
+    Make sure that the app is pulling data from the correct database. You can change the database path either directly in the JSON file or through the Admin Dashboard. See below (Usage) how to access it.
+
 ## Usage
 
 1. Run the Flask application:
